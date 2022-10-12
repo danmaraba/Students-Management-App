@@ -13,6 +13,11 @@ class StudentsController < ApplicationController
         student = Student.create!(students_params)
         render json: student, status: :created
     end
+    def update
+        student = find_student
+        student.update!(students_params)
+        render json: student
+    end
     def destroy
         student = find_student
         student.destroy
@@ -29,6 +34,6 @@ class StudentsController < ApplicationController
         render json: { error: "Student not found" }, status: :not_found
     end
     def render_not_valid_response
-        render json: { error: "Invalidation errors" }, status: :not_found
+        render json: { error: "Invalidation errors" }, status: :unprocessable_entity
     end
 end
