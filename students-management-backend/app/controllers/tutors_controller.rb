@@ -13,6 +13,11 @@ class TutorsController < ApplicationController
         tutor = Tutor.create!(tutors_params)
         render json: tutor, status: :created
     end
+    def update
+        tutor = find_tutor
+        tutor.update!(tutor_params)
+        render json: tutor
+    end
     def destroy
         tutor = find_tutor
         tutor.destroy
@@ -29,6 +34,6 @@ class TutorsController < ApplicationController
         render json: { error: "tutor not found" }, status: :not_found
     end
     def render_not_valid_response
-        render json: { error: "Invalidation errors" }, status: :not_found
+        render json: { error: "Invalidation errors" }, status: :unprocessable_entity
     end
 end
