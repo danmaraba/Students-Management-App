@@ -16,7 +16,7 @@ class StudentsController < ApplicationController
     def update
         student = find_student
         student.update!(students_params)
-        render json: student
+        render json: student, status: :accepted
     end
     def destroy
         student = find_student
@@ -28,7 +28,7 @@ class StudentsController < ApplicationController
         Student.find(params[:id])
     end
     def students_params
-        params.permit(:name,:gender,:course,:year_of_study)
+        params.permit(:name,:gender,:course,:year_of_study,:username,:email,:password,:password_confirmation)
     end
     def render_not_found_response
         render json: { error: "Student not found" }, status: :not_found
